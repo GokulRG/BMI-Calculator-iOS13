@@ -47,6 +47,8 @@ class CalculateViewController: UIViewController {
             // segue.destination refers to the destination view controller
             let destinationVC = segue.destination as! ResultViewController
             destinationVC.bmiValue = calculatorBrain.getBMIValue()
+            destinationVC.advice = calculatorBrain.getAdvice()
+            destinationVC.color = calculatorBrain.getColor()
         }
     }
 }
