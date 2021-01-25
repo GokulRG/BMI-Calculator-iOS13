@@ -14,7 +14,8 @@ class CalculateViewController: UIViewController {
     @IBOutlet weak var weightLabel: UILabel!
     @IBOutlet weak var weightSlider: UISlider!
     @IBOutlet weak var heightSlider: UISlider!
-    var bmiValue = "0.0"
+    
+    var calculatorBrain = CalculatorBrain()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,7 +38,7 @@ class CalculateViewController: UIViewController {
         let height = heightSlider.value
         let weight = weightSlider.value
         
-        bmiValue = String(format:"%.1f",weight/(height * height))
+        calculatorBrain.calculateBMI(height: height, weight: weight)
         self.performSegue(withIdentifier: "goToResult", sender: self)
     }
     
@@ -45,7 +46,7 @@ class CalculateViewController: UIViewController {
         if (segue.identifier == "goToResult") {
             // segue.destination refers to the destination view controller
             let destinationVC = segue.destination as! ResultViewController
-            destinationVC.bmiValue = self.bmiValue
+            destinationVC.bmiValue = calculatorBrain.getBMIValue()
         }
     }
 }
